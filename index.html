@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="google-signin-scope" content="profile email" />
+    <meta
+      name="google-signin-client_id"
+      content="453909117338-ug3mucktarreoma7ovs1dap3n82vojdo.apps.googleusercontent.com"
+    />
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <title>CarMate what</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Kode+Mono:wght@600&display=swap"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      rel="stylesheet"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Kode+Mono:wght@600&family=Oswald:wght@200..700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://kit.fontawesome.com/5c9a564e20.js" crossorigin="anonymous"></script>
+  </head>
+
+  <script>
+    function handleCredentialResponse(response) {
+      fetch('/verify-google-id-token', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ token: response.credential }),
+      })
+        .then((response) => {
+          if (!response.ok) {
+            console.error('Response Status:', response.status);
+            throw new Error(
+              `Network response was not ok: ${response.statusText} (Status: ${response.status})`
+            );
+          }
+          return response.json();
+        })
+        .then((data) => {
+          if (data.isUChicagoDomain) {
+            window.location.href = '/newrequest.html';
+          } else {
+            alert('This feature is currently available only for @uchicago.edu accounts.');
+          }
+        })
+        .catch((error) => console.error('Error:', error));
+    }
+  </script>
+  <body>
+    <header></header>
+    <main>
+      <section id="intro">
+        <h1 id="title">CARMATE</h1>
+        <p id="intro">The best way to get to the airport with other UChicago students</p>
+        <div class="icon-container">
+          <div class="icon-item">
+            <div class="icon">
+              <i class="fas fa-map-marker-alt"></i>
+            </div>
+            <p class="icon-text">
+              Put down your start location, destination,<br />
+              and contact information
+            </p>
+          </div>
+          <i class="fa-solid fa-arrow-down" style="color: yellow"></i>
+          <div class="icon-arrow"></div>
+          <div class="icon-item">
+            <div class="icon"><i class="fas fa-clock"></i></div>
+            <p class="icon-text">Wait to match with your CarMate</p>
+          </div>
+          <i class="fa-solid fa-arrow-down" style="color: yellow"></i>
+          <div class="icon-item">
+            <div class="icon"><i class="fas fa-envelope"></i></div>
+            <p class="icon-text">Get notified through email when you get matched</p>
+          </div>
+          <i class="fa-solid fa-arrow-down" style="color: yellow"></i>
+          <div class="icon-item">
+            <div class="icon"><i class="fas fa-phone"></i></div>
+            <p class="icon-text">Contact your CarMate to decide meeting specifics</p>
+          </div>
+        </div>
+      </section>
+      <!-- Additional sections would go here -->
+      <!-- Sign In -->
+      <div
+        id="g_id_onload"
+        data-client_id="453909117338-ug3mucktarreoma7ovs1dap3n82vojdo.apps.googleusercontent.com"
+        data-auto_prompt="false"
+        data-callback="handleCredentialResponse"
+      ></div>
+      <div
+        class="g_id_signin"
+        data-type="standard"
+        data-shape="rectangular"
+        data-theme="outline"
+        data-text="$ {button.text}"
+        data-size="large"
+        data-logo_alignment="left"
+      ></div>
+    </main>
+    <footer>
+      <!-- Footer content goes here -->
+    </footer>
+  </body>
+</html>
