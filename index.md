@@ -2,6 +2,4 @@
 
 This is for Communicating with Markdown module - adding header to a file
 
-![Image of Dolomites](https://imgur.com/a/LKKwmav)
-
-Added the image!
+![Image of Dolomites](https://imgur.com/TThBIMQ.jpeg)
