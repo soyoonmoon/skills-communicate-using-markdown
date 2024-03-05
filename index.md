@@ -3,3 +3,4 @@
 This is for Communicating with Markdown module - adding header to a file
 
 ![Image of Dolomites](https://imgur.com/TThBIMQ.jpeg)
+![Dolomites](https://github.com/soyoonmoon/skills-communicate-using-markdown/assets/100046578/22be4a8a-8ae2-4a1b-808f-01a7db012ac3)
